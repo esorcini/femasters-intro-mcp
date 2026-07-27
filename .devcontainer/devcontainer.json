@@ -1,0 +1,52 @@
+{
+  "name": "Secure AI DevContainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "dev",
+  "updateRemoteUserUID": false,
+  "runArgs": [
+    "--init",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges:true",
+    "--pids-limit=512",
+    "--memory=6g",
+    "--memory-swap=6g",
+    "--cpus=3",
+    "--add-host=host.docker.internal:host-gateway"
+  ],
+  "containerEnv": {
+    "OLLAMA_HOST": "http://host.docker.internal:11434",
+    "EDITOR": "vim",
+    "PAGER": "less",
+    "TERM": "xterm-256color",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "forwardPorts": [5173, 3000],
+  "portsAttributes": {
+    "5173": {
+      "label": "Frontend"
+    },
+    "3000": {
+      "label": "Backend API"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "sst-dev.opencode",
+        "ms-python.python",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-json"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.eol": "\n",
+        "git.autofetch": false,
+        "terminal.integrated.enablePersistentSessions": false
+      }
+    }
+  },
+  "shutdownAction": "stopContainer"
+}

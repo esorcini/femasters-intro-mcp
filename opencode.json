@@ -1,0 +1,30 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "name": "Ollama (local)",
+        "baseURL": "http://host.docker.internal:11434/v1"
+      },
+      "models": {
+        "qwen3.5": {
+          "name": "qwen2.5-coder:7b"
+        }
+      }
+    }
+  },
+  "mcp": {
+    "issues-server": {
+      "enabled": true,
+      "type": "local",
+      "command": [
+        "/usr/local/bin/node",
+        "/workspaces/mcp-issue-tracker/my-mcp/main.js"
+      ],
+      "environment": {
+        "NODE_OPTION": "--no-deprecation"
+      }
+    }
+  }
+}
